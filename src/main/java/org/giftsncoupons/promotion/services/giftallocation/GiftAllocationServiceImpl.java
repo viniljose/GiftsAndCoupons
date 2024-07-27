@@ -5,7 +5,7 @@ import org.giftsncoupons.promotion.domain.entities.Gift;
 import org.giftsncoupons.promotion.domain.entities.Purchase;
 import org.giftsncoupons.promotion.domain.repositories.GiftRepository;
 import org.giftsncoupons.promotion.domain.repositories.PurchaseRepository;
-import org.giftsncoupons.promotion.services.email.EmailService;
+import org.giftsncoupons.promotion.gateway.email.EmailGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class GiftAllocationServiceImpl implements GiftAllocationService{
     @Autowired
     private GiftRepository giftRepository;
     @Autowired
-    private EmailService emailService;
+    private EmailGateway emailGateway;
 
 /*    public GiftAllocationService(PurchaseRepository purchaseRepository, GiftRepository giftRepository, EmailService emailService) {
         this.purchaseRepository = purchaseRepository;
@@ -31,7 +31,11 @@ public class GiftAllocationServiceImpl implements GiftAllocationService{
 
     public void allocateGiftsForPurchases(LocalDate date) {
         List<Purchase> purchases = purchaseRepository.findPurchasesByDate(date);
+        int allocatedCount = 0;
         for (Purchase purchase : purchases) {
+            if (allocatedCount >= 1000) {
+                break;
+            }
             if (purchase.getAmount().compareTo(new BigDecimal("1999")) >= 0) {
                 Optional<Gift> giftOpt = giftRepository.findFirstAvailableGiftByDate(date);
                 if (giftOpt.isPresent()) {
@@ -41,7 +45,8 @@ public class GiftAllocationServiceImpl implements GiftAllocationService{
                     giftRepository.save(gift);
 
                     // Send email notification
-                    emailService.sendGiftAllocationEmail(purchase.getCustomer(), gift);
+                    emailGateway.sendGiftAllocationEmail(purchase.getCustomer(), gift);
+                    allocatedCount++;
                 }
             }
         }
