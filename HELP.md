@@ -11,4 +11,10 @@ For further reference, please consider the following sections:
 These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+* 
+### Health Check
+  http://localhost:8080/actuator/health
+  http://localhost:8080/api/health
 
+### Endpoints
+curl -X POST "http://localhost:8080/api/promotions/allocate-gifts?date=2024-07-23"
