@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface GiftRepository {
     Optional<Gift> findFirstAvailableGiftByDate(LocalDate date);
     void save(Gift gift);
+    long availableGifts(LocalDate date);
+    long allocatedGifts(LocalDate date);
+    void loadGifts(LocalDate date);
 }

@@ -12,5 +12,6 @@ public class Gift {
     private BigDecimal value;
     private LocalDate allocatedDate;
     private DeliveryStatus deliveryStatus;
-    // getters and setters
+    private String shippingConfirmationId;
+    private LocalDate deliveryDate;
 }

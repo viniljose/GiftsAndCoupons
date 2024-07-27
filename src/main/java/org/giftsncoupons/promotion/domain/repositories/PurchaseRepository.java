@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PurchaseRepository {
     List<Purchase> findPurchasesByDate(LocalDate date);
+    void loadPurchases(LocalDate date);
 }

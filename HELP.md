@@ -17,4 +17,7 @@ These additional references should also help you:
   http://localhost:8080/api/health
 
 ### Endpoints
-curl -X POST "http://localhost:8080/api/promotions/allocate-gifts?date=2024-07-23"
+curl -X POST "http://localhost:8080/api/promotions/init?date=2024-07-27"
+curl -X POST "http://localhost:8080/api/promotions/allocate-gifts?date=2024-07-27"
+http://localhost:8080/api/promotions/available?date=2024-07-27
+http://localhost:8080/api/promotions/allocated?date=2024-07-27

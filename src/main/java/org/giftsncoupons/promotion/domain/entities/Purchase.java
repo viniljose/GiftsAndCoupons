@@ -4,9 +4,15 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Data
 public class Purchase {
+    public Purchase() {
+        this.items = new ArrayList<>();
+        this.amount= new BigDecimal(0);
+    }
+
     private Long id;
     private Customer customer;
     private BigDecimal amount;
